@@ -1,0 +1,24 @@
+class Solution {
+    // Function to find maximum of each subarray of size k.
+    public ArrayList<Integer> max_of_subarrays(int a[], int k) {
+        // Your code here
+        LinkedList<Integer> li = new LinkedList<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        int l=0, r=0;
+        int n = a.length;
+        while(r < n) {
+            while(li.size() > 0 && li.getLast() < a[r]) li.removeLast();
+            li.addLast(a[r]);
+            
+            if(r-l+1 == k) {
+                ans.add(li.getFirst());
+                if(a[l] == li.getFirst()) {
+                    li.removeFirst();
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+}
